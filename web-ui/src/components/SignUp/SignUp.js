@@ -5,13 +5,13 @@ import { SignUpSocialNetwork } from "./SignUpSocialNetwork/SignUpSocialNetwork";
 import { SignUpSeparator } from "./SignUpSeparator/SignUpSeparator";
 import { SignUpEmail } from "./SignUpEmail/SignUpEmail";
 import { JoinCommunity } from "./JoinCommunity/JoinCommunity";
-import { Close as CloseIcon } from "@material-ui/icons";
+// import { Close as CloseIcon } from "@material-ui/icons";
 
 export const SignUp = () => {
   return (
     <Dialog fullScreen open={true}>
       <Paper>
-        <CloseIcon fontSize={"large"} />
+        {/* <CloseIcon fontSize={"large"} /> */}
         <Grid
           container
           direction="column"
