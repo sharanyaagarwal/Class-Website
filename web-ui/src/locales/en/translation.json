@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "Class Website",
+    "subtitle": "A Class Website",
+    "description": "A Class Website description",
+    "year": "2020"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "alreadyMemberText": "Already a member?",
+    "loginText": "Log In",
+    "separatorORText": "or",
+    "signUpText": {
+      "withFacebook": "Sign up with Facebook",
+      "withGoogle": "Sign up with Google",
+      "withEmailText": "Sign up with email"
+    },
+    "joinCommunityText": "Join this site's community.",
+    "readMoreText": "Read more"
+  }
+}
