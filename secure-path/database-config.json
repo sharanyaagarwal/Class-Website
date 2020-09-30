@@ -1,0 +1,23 @@
+{
+  "masterDatabase": {
+    "host": "localhost",
+    "user": "root",
+    "password": "jack",
+    "database": "classweb",
+    "pool": {
+      "min": 0,
+      "max": 10
+    },
+    "port": 3308
+  },
+  "authenticationServer": {
+    "host": "localhost",
+    "user": "root",
+    "password": "jack",
+    "database": "authentication",
+    "pool": {
+      "min": 0,
+      "max": 10
+    }
+  }
+}

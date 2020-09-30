@@ -1,0 +1,22 @@
+{
+  "certificates": {
+    "key": "/mnt/d/class-website/Class-Website/secure-path/server-certificates/server.key",
+    "cert": "/mnt/d/class-website/Class-Website/secure-path/server-certificates/server.cert",
+    "ca": false
+  },
+  "environment": "development",
+  "serverRootPath": "./",
+  "masterDatabase": {
+    "requestScheme": "https",
+    "fqdnOrIp": "localhost",
+    "port": 3308
+  },
+  "server": {
+    "requestScheme": "https",
+    "port": 9090,
+    "fqdnOrIp": "localhost",
+    "appDir": "web-server",
+    "isProxy": 0,
+    "proxy": "rest-service"
+  }
+}
