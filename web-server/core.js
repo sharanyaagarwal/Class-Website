@@ -55,10 +55,8 @@ const userRoute = require("./routes/user");
 app.use("/user", userRoute);
 
 app.get("*", (req, res) => {
-  res.send(
-    `<h2>Thanks for hitting the URL using 'https://'.</h2> 
-    <h3>Your are trying to access Class Web APIs.</h3>`
-  );
+  console.log("Worker Process = " + process.pid);
+  res.send("Worker Process = " + process.pid);
 });
 
 app.disable("x-powered-by"); // Disabling http header `x-powered-by`

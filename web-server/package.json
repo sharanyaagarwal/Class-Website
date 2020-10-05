@@ -2,11 +2,11 @@
   "name": "web-server",
   "version": "1.0.0",
   "description": "Web APIs for Class Web",
-  "main": "core.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node core.js",
-    "start:dev": "nodemon core.js",
-    "prod": "node build/core-api.js",
+    "start": "node app.js",
+    "start:dev": "nodemon app.js",
+    "prod": "node build/app-api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,7 +21,10 @@
     "moment": "^2.29.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
+    "validator": "^13.1.17",
     "winston": "^3.3.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "loadtest": "^5.1.0"
+  }
 }
