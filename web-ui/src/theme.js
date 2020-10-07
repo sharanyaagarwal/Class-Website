@@ -14,6 +14,12 @@ export const classWebTheme = createMuiTheme({
     fontWeight: 500,
   },
   palette: {
+    primary: {
+      main: "#FFD45A",
+    },
+    secondary: {
+      main: TEXT_GRAY,
+    },
     text: {
       primary: TEXT_GRAY,
     },
@@ -22,7 +28,16 @@ export const classWebTheme = createMuiTheme({
     MuiButton: {
       root: {
         textTransform: "initial",
-        borderRadius: "none",
+        borderRadius: 20,
+      },
+      label: {
+        color: TEXT_GRAY,
+      },
+      outlinedPrimary: {
+        "&:hover": {
+          backgroundColor: "#FFD45A",
+        },
+        borderWidth: 3,
       },
     },
   },

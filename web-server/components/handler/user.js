@@ -76,6 +76,8 @@ const userSignUpProcess = (reqParams) => {
           // proceed to create new user
           bcrypt.hash(reqParams.password, saltRounds, function (err, hash) {
             const insertParam = {
+              first_name: reqParams.first_name,
+              last_name: reqParams.last_name,
               email: reqParams.email,
               password: hash,
             };
@@ -105,7 +107,7 @@ const userSignUpProcess = (reqParams) => {
 const signUpCheckPoint = (data) => {
   return new Promise((resolve, reject) => {
     // require params to sign-up an user
-    const requiredParams = ["email", "password"];
+    const requiredParams = ["first_name", "last_name", "email", "password"];
     // checking the required params with the provided params
     const checkPoint = requiredParams.filter((i) => {
       return data.hasOwnProperty(i) && data[i] != "";
