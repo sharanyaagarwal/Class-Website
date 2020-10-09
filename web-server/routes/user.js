@@ -32,7 +32,8 @@ router.post("/sign-up", async (req, res) => {
     // Got `Success` response from Fn
     res.status(200).send({
       status: true,
-      message: "Sign Up successful",
+      message:
+        "Sign Up successful. A link has been sent to you over email for verification.",
     });
   } catch (err) {
     // Got `Error` response from Fn

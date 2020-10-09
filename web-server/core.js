@@ -43,8 +43,10 @@ const https = require("https"),
     app
   ),
   // DEFINING CLOUD SERVER PORT with the help of configuration file, driven from app-config.json
-  serverPort = config.server.port;
+  serverPort = config.server.port,
+  cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 // app.use(express.urlencoded());
 
