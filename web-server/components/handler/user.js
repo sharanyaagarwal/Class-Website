@@ -1,6 +1,7 @@
 const sql = require(__base + "/components/db-master/sql-queries");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const randomize = require("randomatic");
 
 const saltRounds = 10;
 
@@ -74,15 +75,20 @@ const userSignUpProcess = (reqParams) => {
           );
         } else {
           // proceed to create new user
-          bcrypt.hash(reqParams.password, saltRounds, function (err, hash) {
+          bcrypt.hash(reqParams.password, saltRounds, async function (
+            err,
+            hash
+          ) {
             const insertParam = {
               first_name: reqParams.first_name,
               last_name: reqParams.last_name,
               email: reqParams.email,
               password: hash,
+              secure_code: randomize("0", 8),
             };
+
             try {
-              const res = sql.insert(userTbl, insertParam);
+              const res = await sql.insert(userTbl, insertParam);
               // new user created
               if (res) {
                 resolve(true);

@@ -37,9 +37,10 @@ router.post("/sign-up", async (req, res) => {
     });
   } catch (err) {
     // Got `Error` response from Fn
+    const errMsg = typeof err === "string" ? err : "Some error occurred.";
     res.status(200).send({
       status: false,
-      message: err,
+      message: errMsg,
     });
   }
 });
