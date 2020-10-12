@@ -6,28 +6,25 @@ import {
   Typography,
   Box,
   IconButton,
-  Slide,
 } from "@material-ui/core";
 import { EmailForm } from "./EmailForm";
 import { useTranslation } from "react-i18next";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { SignUpCode } from "./SignUpCode";
 
 export const Email = (props) => {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(true);
   const history = useHistory();
+  const [showScreenCode, setShowScreenCode] = React.useState(true);
 
   if (!open) {
-    history.push("/sign-up");
+    history.push("/");
   }
 
   return (
-    <Dialog fullScreen open={open} TransitionComponent={Transition}>
+    <Dialog fullScreen open={open}>
       <Paper>
         <IconButton
           aria-label="Close SignUp form"
@@ -38,37 +35,43 @@ export const Email = (props) => {
         >
           <CloseIcon fontSize={"large"} color="secondary" />
         </IconButton>
-        <Grid
-          container
-          direction="column"
-          spacing={0}
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "100vh" }}
-        >
-          <Grid item xs={3}>
-            <Box mb={4}>
-              <Typography
-                variant="h3"
-                align="center"
-                style={{
-                  fontFamily: "'Nunito', sans-serif",
-                  fontWeight: 600,
-                }}
-              >
-                {t("signup.title")}
+        {!showScreenCode ? (
+          <Grid
+            container
+            direction="column"
+            spacing={0}
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: "100vh" }}
+          >
+            <Grid item xs={3}>
+              <Box mb={4}>
+                <Typography
+                  variant="h3"
+                  align="center"
+                  style={{
+                    fontFamily: "'Nunito', sans-serif",
+                    fontWeight: 600,
+                  }}
+                >
+                  {t("signup.title")}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={3} children={<EmailForm />}></Grid>
+            <Grid item xs={3}>
+              <Box mt={2}></Box>
+              <Typography>
+                {t("signup.alreadyMemberText")}{" "}
+                <Typography component="span">
+                  {t("signup.loginText")}
+                </Typography>
               </Typography>
-            </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={3} children={<EmailForm />}></Grid>
-          <Grid item xs={3}>
-            <Box mt={2}></Box>
-            <Typography>
-              {t("signup.alreadyMemberText")}{" "}
-              <Typography component="span">{t("signup.loginText")}</Typography>
-            </Typography>
-          </Grid>
-        </Grid>
+        ) : (
+          <SignUpCode />
+        )}
       </Paper>
     </Dialog>
   );
