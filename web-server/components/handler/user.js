@@ -26,6 +26,16 @@ const userHandler = {
       }
     });
   },
+  userSignUpCodeVerification: (reqParams) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await userSignUpCodeVerificationProcess(reqParams);
+        resolve(response);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
 };
 
 const userTbl = "user";
@@ -110,10 +120,50 @@ const userSignUpProcess = (reqParams) => {
   });
 };
 
+const userSignUpCodeVerificationProcess = (reqParams) => {
+  const what = "secure_code";
+  const conditions = {
+    where: {
+      email: reqParams.email,
+      secure_code: reqParams.verification_code,
+    },
+  };
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Checking - required params
+      await signUpSignUpCodeCheckPoint(reqParams, reject);
+      // verifying code from database
+      const rows = await sql.select(userTbl, what, conditions);
+      if (!rows.length) {
+        return reject("Code verification failed.");
+      } else {
+        resolve(true);
+      }
+    } catch (err) {
+      // error - any other error
+      reject(err);
+    }
+  });
+};
+
 const signUpCheckPoint = (data) => {
   return new Promise((resolve, reject) => {
     // require params to sign-up an user
     const requiredParams = ["first_name", "last_name", "email", "password"];
+    // checking the required params with the provided params
+    const checkPoint = requiredParams.filter((i) => {
+      return data.hasOwnProperty(i) && data[i] != "";
+    });
+    requiredParams.length == checkPoint.length
+      ? resolve(true)
+      : reject("Bad Request");
+  });
+};
+
+const signUpSignUpCodeCheckPoint = (data) => {
+  return new Promise((resolve, reject) => {
+    // require params to sign-up an user
+    const requiredParams = ["email", "verification_code"];
     // checking the required params with the provided params
     const checkPoint = requiredParams.filter((i) => {
       return data.hasOwnProperty(i) && data[i] != "";
