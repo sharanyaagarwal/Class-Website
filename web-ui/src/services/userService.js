@@ -4,7 +4,9 @@ export const postUserSignUp = async (
   values,
   setLoading,
   setError,
-  setResponse
+  setResponse,
+  setShowScreenCode,
+  setEmail
 ) => {
   try {
     setLoading(true);
@@ -35,11 +37,51 @@ export const postUserSignUp = async (
           severity: "success",
           message: response.data.message,
         });
+        setShowScreenCode(true);
+        setEmail(values.email);
       }
     }
   } catch (error) {
     setError(error);
   } finally {
     setLoading(false);
+  }
+};
+
+export const verifyCode = async (
+  values,
+  email,
+  setLoading,
+  setError,
+  setResponse,
+  setShowVerificationStatusScreen
+) => {
+  setResponse();
+  const data = {
+    email,
+    verification_code: values.verificationCode,
+  };
+  const response = await axios({
+    method: "post",
+    url: `https://localhost:9000/user/sign-up-code/verify`,
+    data,
+  });
+
+  if (response && response.data) {
+    if (response.data.status === false) {
+      setResponse({
+        openState: true,
+        severity: "error",
+        message: response.data.message,
+      });
+    }
+    if (response.data.status === true) {
+      setResponse({
+        openState: true,
+        severity: "success",
+        message: response.data.message,
+      });
+      setShowVerificationStatusScreen(true);
+    }
   }
 };

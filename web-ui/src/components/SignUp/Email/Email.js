@@ -17,7 +17,8 @@ export const Email = (props) => {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(true);
   const history = useHistory();
-  const [showScreenCode, setShowScreenCode] = React.useState(true);
+  const [showScreenCode, setShowScreenCode] = React.useState(false);
+  const [email, setEmail] = React.useState("");
 
   if (!open) {
     history.push("/");
@@ -58,7 +59,16 @@ export const Email = (props) => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={3} children={<EmailForm />}></Grid>
+            <Grid
+              item
+              xs={3}
+              children={
+                <EmailForm
+                  setShowScreenCode={setShowScreenCode}
+                  setEmail={setEmail}
+                />
+              }
+            ></Grid>
             <Grid item xs={3}>
               <Box mt={2}></Box>
               <Typography>
@@ -70,7 +80,7 @@ export const Email = (props) => {
             </Grid>
           </Grid>
         ) : (
-          <SignUpCode />
+          <SignUpCode email={email} />
         )}
       </Paper>
     </Dialog>

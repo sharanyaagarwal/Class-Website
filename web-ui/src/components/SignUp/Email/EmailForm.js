@@ -5,16 +5,16 @@ import * as Yup from "yup";
 import { postUserSignUp } from "../../../services/userService";
 import { Notification } from "../../UI/Notification";
 
-export const EmailForm = () => {
-  const [formData, setFormData] = React.useState({
+export const EmailForm = (props) => {
+  const [formData] = React.useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
 
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [, setLoading] = React.useState(false);
+  const [, setError] = React.useState(null);
   const [response, setResponse] = React.useState();
 
   return (
@@ -25,7 +25,14 @@ export const EmailForm = () => {
       // onSubmit - Callback definition to execute on the click of Form Submit
       onSubmit={(values, { setSubmitting, setFieldError }) => {
         setSubmitting(true);
-        postUserSignUp(values, setLoading, setError, setResponse, setFormData);
+        postUserSignUp(
+          values,
+          setLoading,
+          setError,
+          setResponse,
+          props.setShowScreenCode,
+          props.setEmail
+        );
       }}
       validationSchema={signUpEmailFormValidation}
     >
@@ -33,7 +40,7 @@ export const EmailForm = () => {
         const { dirty, isValid, handleSubmit, handleChange } = props;
         return (
           <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
               <Grid container spacing={2} justify="center" alignItems="center">
                 <Grid item xs={12}>
                   <TextField

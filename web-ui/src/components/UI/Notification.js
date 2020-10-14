@@ -8,10 +8,6 @@ const Alert = (props) => {
 
 export const Notification = ({ openState, severity, message }) => {
   const [open, setOpen] = React.useState(openState);
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
